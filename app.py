@@ -4,7 +4,13 @@ from scipy.sparse import load_npz
 import pandas as pd
 from numpy import load
 from hybrid_recommendations import HybridRecommenderSystem
+import os
 
+# Download LFS files if needed (for Streamlit Cloud)
+if not os.path.exists("data/cleaned_data.csv") or os.path.getsize("data/cleaned_data.csv") < 1000:
+    st.info("🔄 Downloading data files... This may take a moment on first run.")
+    from download_lfs_files import download_lfs_files
+    download_lfs_files()
 
 # load the data
 cleaned_data_path = "data/cleaned_data.csv"
